@@ -65,7 +65,7 @@ export default function EMICalculator() {
             {/* Principal Amount Input */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Principal Amount (₹)
+                Principal Amount ($)
               </label>
               <div className="relative">
                 <DollarSign className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -136,40 +136,40 @@ export default function EMICalculator() {
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Calculation Results</h2>
                 
                 <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <div className="text-sm text-gray-600 mb-1">Monthly EMI</div>
+                  <div className="text-sm text-gray-600 mb-1 font-bold">Monthly EMI</div>
                   <div className="text-3xl font-bold text-indigo-600">
-                    ₹{emi.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    ${emi.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <div className="text-sm text-gray-600 mb-1">Principal Amount</div>
+                    <div className="text-sm text-gray-600 mb-1 font-bold">Principal Amount</div>
                     <div className="text-lg font-semibold text-gray-800">
-                      ₹{parseFloat(principal).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      ${parseFloat(principal).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                   </div>
 
                   <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <div className="text-sm text-gray-600 mb-1">Total Interest</div>
+                    <div className="text-sm text-gray-600 mb-1 font-bold">Total Interest</div>
                     <div className="text-lg font-semibold text-orange-600">
-                      ₹{totalInterest.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      ${totalInterest.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-white rounded-lg p-4 shadow-sm">
-                  <div className="text-sm text-gray-600 mb-1">Total Amount Payable</div>
+                  <div className="text-sm text-gray-600 mb-1 font-bold">Total Amount Payable</div>
                   <div className="text-2xl font-bold text-green-600">
-                    ₹{totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    ${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </div>
                 </div>
 
-                <div className="text-xs text-gray-500 mt-4">
+               {/*<div className="text-xs text-gray-500 mt-4">
                   <strong>Formula used:</strong> EMI = [P × R × (1+R)^N] / [(1+R)^N - 1]
                   <br />
                   Where P = Principal, R = Monthly Interest Rate, N = Tenure in months
-                </div>
+                </div>*/}
               </div>
             )}
           </div>
@@ -180,19 +180,25 @@ export default function EMICalculator() {
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Sample Test Cases</h3>
           <div className="space-y-2 text-sm text-gray-600">
             <div className="p-3 bg-gray-50 rounded">
-              <strong>Test 1:</strong> Principal: ₹100,000 | Annual Rate: 12% | Tenure: 12 months
+              <strong>Test 1:
+                <br />
+                </strong> Principal: $100,000 | Annual Rate: 12% | Tenure: 12 months
               <br />
-              <span className="text-indigo-600">Expected EMI: ₹8,884.88</span>
+              <span className="text-indigo-600">Expected EMI: $8,884.88</span>
             </div>
             <div className="p-3 bg-gray-50 rounded">
-              <strong>Test 2:</strong> Principal: ₹500,000 | Annual Rate: 10.5% | Tenure: 60 months
+              <strong>Test 2:
+                <br />
+                </strong> Principal: $500,000 | Annual Rate: 10.5% | Tenure: 60 months
               <br />
-              <span className="text-indigo-600">Expected EMI: ₹10,743.65</span>
+              <span className="text-indigo-600">Expected EMI: $10,743.65</span>
             </div>
             <div className="p-3 bg-gray-50 rounded">
-              <strong>Test 3:</strong> Principal: ₹1,000,000 | Annual Rate: 8.5% | Tenure: 240 months
+              <strong>Test 3:
+                <br />
+                </strong> Principal: $1,000,000 | Annual Rate: 8.5% | Tenure: 240 months
               <br />
-              <span className="text-indigo-600">Expected EMI: ₹7,689.11</span>
+              <span className="text-indigo-600">Expected EMI: $7,689.11</span>
             </div>
           </div>
         </div>
