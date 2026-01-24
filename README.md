@@ -1,1 +1,1 @@
-create some simple calculation for the calculate the Loan EMI and developing usign pythone and i hope adding some advance function the calculation systme, continewly developing it. 
+create some simple calculation for the calculate the Loan EMI and developing usign pythone and react. i hope adding some advance function the calculation systme and continewly developing it. 
