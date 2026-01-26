@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Calculator, DollarSign, Percent, Calendar, PieChart as PieIcon, Table as TableIcon, Download, Sliders as SliderIcon } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+//import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 
 export default function EMICalculator() {
   //State Variables
@@ -158,7 +159,7 @@ export default function EMICalculator() {
       tableRows.push(rowData);
     });
 
-    doc.autoTable({
+    autoTable(doc,{
       startY: 85,
       head: [tableColumn],
       body: tableRows,
