@@ -1,0 +1,28 @@
+# 💰 Advanced Loan EMI Calculator
+
+A professional, responsive desktop application built with **Python** and **Tkinter** to calculate Loan Equated Monthly Installments (EMI). This tool provides a detailed amortization schedule and supports modern UI features like Dark Mode.
+
+## 🚀 Features
+
+* **Precise EMI Calculation:** Calculates monthly installments based on Principal, Interest Rate, and Tenure.
+* **Detailed Amortization Table:** Displays a month-by-month breakdown of Interest vs. Principal repayment and the remaining balance.
+* **Financial Summary:** Instantly view the **Total Interest Payable** and **Total Payment** amount.
+* **Responsive Design:** The UI automatically adjusts to any window size (Full Screen / Resized) using a flexible grid layout.
+* **Theme Support:** Built-in **Dark Mode** and **Light Mode** toggle via the menu bar.
+* **User-Friendly Interface:** Clean, centered layout with validation for inputs.
+
+## 🛠️ Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+* **Python 3.x** installed on your machine.
+* **Tkinter** library (Usually comes pre-installed with Python).
+
+## 📥 Installation & Usage
+
+1.  **Clone or Download** this repository.
+2.  Navigate to the project directory.
+3.  Run the application using the command line:
+
+```bash
+python loan_app_pro.py
