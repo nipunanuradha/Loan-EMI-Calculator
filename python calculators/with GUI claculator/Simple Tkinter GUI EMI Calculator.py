@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, Menu
 
-# --- වර්ණ පද්ධතිය (Color Palettes) ---
-# Dark සහ Light Mode සඳහා වර්ණ කේත මෙතැන නිර්වචනය කර ඇත.
+# colors palette for themes
+# Dark and light mode color definitions
 THEMES = {
     "light": {
         "bg": "#ffffff", "fg": "#000000",
@@ -20,39 +20,39 @@ THEMES = {
     }
 }
 
-# දැනට පවතින Theme එක (Default = Light)
+# Default theme (Default = Light)
 current_theme = "light"
 
 def apply_theme(mode):
-    """තෝරාගත් Mode එකට අදාළව සියලුම Widget වල පාට වෙනස් කිරීම"""
+    """select and apply the theme to the GUI components"""
     global current_theme
     current_theme = mode
     colors = THEMES[mode]
 
-    # 1. ප්‍රධාන කවුළුවේ පාට
+    # main window and frames colors
     root.config(bg=colors["bg"])
     main_frame.config(bg=colors["bg"])
     input_frame.config(bg=colors["bg"])
     btn_frame.config(bg=colors["bg"])
     table_container.config(bg=colors["bg"])
     
-    # 2. අකුරු (Labels)
+    # Labels
     lbl_title.config(bg=colors["bg"], fg=colors["fg"])
     
-    # Input Labels සඳහා Loop එකක්
+    # Input Labels loop
     for widget in input_frame.winfo_children():
         if isinstance(widget, tk.Label):
             widget.config(bg=colors["bg"], fg=colors["fg"])
         elif isinstance(widget, tk.Entry):
             widget.config(bg=colors["entry_bg"], fg=colors["entry_fg"], insertbackground=colors["fg"])
 
-    # 3. Summary Cards (යටින් ඇති කොටු)
+    # Summary Cards 
     summary_frame.config(bg=colors["card_bg"])
     for widget in summary_frame.winfo_children():
         widget.config(bg=colors["card_bg"])
-        # විශේෂිත අකුරු පාට (EMI = Blue/Cyan, Interest = Red/Orange)
+        # special color for letters (EMI = Blue/Cyan, Interest = Red/Orange)
         if widget in [lbl_emi_val, lbl_interest_val, lbl_total_val]:
-            # Dark Mode එකේදී පාට ටිකක් දීප්තිමත් කරමු
+            # Dark Mode bright
             if mode == "dark":
                 if widget == lbl_emi_val: widget.config(fg="#4fc3f7") # Light Blue
                 elif widget == lbl_interest_val: widget.config(fg="#ff8a65") # Light Red
@@ -64,9 +64,9 @@ def apply_theme(mode):
         else:
             widget.config(fg=colors["card_fg"])
 
-    # 4. වගුව (Treeview) Style කිරීම
+    # Treeview Style 
     style = ttk.Style()
-    style.theme_use("clam") # 'clam' theme එක පාට වෙනස් කරන්න ලේසියි
+    style.theme_use("clam") # 'clam' theme easy to customize
     
     style.configure("Treeview", 
                     background=colors["tree_bg"],
@@ -95,11 +95,11 @@ def calculate_loan():
         total_payment = emi * n
         total_interest = total_payment - principal
 
-        lbl_emi_val.config(text=f"රු. {emi:,.2f}")
-        lbl_total_val.config(text=f"රු. {total_payment:,.2f}")
-        lbl_interest_val.config(text=f"රු. {total_interest:,.2f}")
+        lbl_emi_val.config(text=f"/= {emi:,.2f}")
+        lbl_total_val.config(text=f"/= {total_payment:,.2f}")
+        lbl_interest_val.config(text=f"/= {total_interest:,.2f}")
 
-        # වගුව පිරවීම
+        # fill table
         for row in tree.get_children():
             tree.delete(row)
 
@@ -124,7 +124,7 @@ def reset_fields():
     lbl_interest_val.config(text="---")
     for row in tree.get_children(): tree.delete(row)
 
-# --- GUI Setup ---
+# GUI Setup 
 
 root = tk.Tk()
 root.title("EMI Calculator Pro")
@@ -140,62 +140,62 @@ main_frame.grid(row=0, column=0, sticky="nsew")
 main_frame.columnconfigure(0, weight=1)
 main_frame.rowconfigure(4, weight=1)
 
-# 1. Title
-lbl_title = tk.Label(main_frame, text="ණය වාරික ගණක යන්ත්‍රය", font=("Helvetica", 20, "bold"))
+#  Title
+lbl_title = tk.Label(main_frame, text="EMI Calculator", font=("Helvetica", 20, "bold"))
 lbl_title.grid(row=0, column=0, pady=(0, 20))
 
-# 2. Input Section
+#  Input Section
 input_frame = tk.Frame(main_frame)
 input_frame.grid(row=1, column=0, pady=10)
 
-tk.Label(input_frame, text="ණය මුදල (Principal):", font=("Arial", 11)).grid(row=0, column=0, padx=10, pady=5, sticky="e")
+tk.Label(input_frame, text="Principal Amount:", font=("Arial", 11)).grid(row=0, column=0, padx=10, pady=5, sticky="e")
 entry_principal = tk.Entry(input_frame, font=("Arial", 11), width=20)
 entry_principal.grid(row=0, column=1, padx=10, pady=5)
 
-tk.Label(input_frame, text="වාර්ෂික පොලිය (%):", font=("Arial", 11)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+tk.Label(input_frame, text="Annual Interest Rate (%):", font=("Arial", 11)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
 entry_rate = tk.Entry(input_frame, font=("Arial", 11), width=20)
 entry_rate.grid(row=1, column=1, padx=10, pady=5)
 
-tk.Label(input_frame, text="කාලය (අවුරුදු):", font=("Arial", 11)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+tk.Label(input_frame, text="Period (Months):", font=("Arial", 11)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
 entry_years = tk.Entry(input_frame, font=("Arial", 11), width=20)
 entry_years.grid(row=2, column=1, padx=10, pady=5)
 
-# 3. Buttons
+#  Buttons
 btn_frame = tk.Frame(main_frame)
 btn_frame.grid(row=2, column=0, pady=15)
-tk.Button(btn_frame, text="ගණනය කරන්න", command=calculate_loan, bg="#4CAF50", fg="white", font=("Arial", 11, "bold"), width=15).pack(side="left", padx=10)
+tk.Button(btn_frame, text="Calculate", command=calculate_loan, bg="#4CAF50", fg="white", font=("Arial", 11, "bold"), width=15).pack(side="left", padx=10)
 tk.Button(btn_frame, text="Reset", command=reset_fields, bg="#f44336", fg="white", font=("Arial", 11, "bold"), width=10).pack(side="left", padx=10)
 
-# 4. Summary
+# Summary
 summary_frame = tk.Frame(main_frame, bd=1, relief="solid", padx=10, pady=10)
 summary_frame.grid(row=3, column=0, pady=15, sticky="ew")
 summary_frame.columnconfigure(0, weight=1)
 summary_frame.columnconfigure(1, weight=1)
 summary_frame.columnconfigure(2, weight=1)
 
-tk.Label(summary_frame, text="මාසික වාරිකය (EMI)").grid(row=0, column=0)
+tk.Label(summary_frame, text="Monthly EMI").grid(row=0, column=0)
 lbl_emi_val = tk.Label(summary_frame, text="---", font=("Arial", 14, "bold"))
 lbl_emi_val.grid(row=1, column=0, pady=5)
 
-tk.Label(summary_frame, text="මුළු පොලිය").grid(row=0, column=1)
+tk.Label(summary_frame, text="Total Interest").grid(row=0, column=1)
 lbl_interest_val = tk.Label(summary_frame, text="---", font=("Arial", 14, "bold"))
 lbl_interest_val.grid(row=1, column=1, pady=5)
 
-tk.Label(summary_frame, text="මුළු ගෙවීම").grid(row=0, column=2)
+tk.Label(summary_frame, text="Total Payment").grid(row=0, column=2)
 lbl_total_val = tk.Label(summary_frame, text="---", font=("Arial", 14, "bold"))
 lbl_total_val.grid(row=1, column=2, pady=5)
 
-# 5. Table
+#  Table
 table_container = tk.Frame(main_frame)
 table_container.grid(row=4, column=0, sticky="nsew")
 scrollbar = tk.Scrollbar(table_container)
 scrollbar.pack(side="right", fill="y")
 columns = ("Month", "Interest", "Principal", "Balance")
 tree = ttk.Treeview(table_container, columns=columns, show="headings", yscrollcommand=scrollbar.set)
-tree.heading("Month", text="මාසය")
-tree.heading("Interest", text="පොලිය")
-tree.heading("Principal", text="ණය පියවෙන මුදල")
-tree.heading("Balance", text="ඉතිරි ණය")
+tree.heading("Month", text="Month")
+tree.heading("Interest", text="Interest")
+tree.heading("Principal", text="Principal")
+tree.heading("Balance", text="Balance")
 tree.column("Month", width=80, anchor="center")
 tree.column("Interest", width=150, anchor="center")
 tree.column("Principal", width=180, anchor="center")
@@ -203,21 +203,21 @@ tree.column("Balance", width=150, anchor="center")
 tree.pack(side="left", fill="both", expand=True)
 scrollbar.config(command=tree.yview)
 
-# --- Menu Bar (Mode මාරු කිරීම සඳහා) ---
+# Menu Bar Creation
 menubar = Menu(root)
 root.config(menu=menubar)
 
-# View මෙනුව සෑදීම
+# View menu creation
 view_menu = Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Themes (View)", menu=view_menu)
 
-# මෙනු අයිතම එකතු කිරීම
+# Theme Options
 view_menu.add_command(label="Light Mode", command=lambda: apply_theme("light"))
 view_menu.add_command(label="Dark Mode", command=lambda: apply_theme("dark"))
 view_menu.add_separator()
 view_menu.add_command(label="System Default (Reset)", command=lambda: apply_theme("light"))
 
-# වැඩසටහන පටන් ගන්නා විට Light Mode එක යෙදීම
+# start with Light Mode 
 apply_theme("light")
 
 root.mainloop()
